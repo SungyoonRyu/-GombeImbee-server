@@ -2,6 +2,7 @@ import sql from "../db/index.js";
 
 // req에 workspace 정보
 const group_list = async (req, res) => {
+    console.log("list group");
     let query = "SELECT * FROM fgroup WHERE workspace_id = ?;";
     sql.query(query, [req.query.id],
         (error, results) => {
@@ -22,7 +23,8 @@ const group_list = async (req, res) => {
 
 // req.body = { group title, workspace_id }
 const add = async (req, res) => {
-    query ="INSERT INTO fgroup(title, workspace_id) VALUES(?, ?);";
+    console.log("add group");
+    let query ="INSERT INTO fgroup(title, workspace_id) VALUES(?, ?);";
     sql.query(query, [req.body.title, req.body.workspace_id],
         (error, results) => {
             if (error) {
@@ -30,13 +32,14 @@ const add = async (req, res) => {
                 res.sendStatus(400);
                 return;
             }
-            res.sendState(200);
+            res.sendStatus(200);
         });
 }
 
 // req.body = { group id }
 const del = async (req, res) => {
-    query = "DELETE FROM fgroup WHERE id = ?;";
+    console.log("del group");
+    let query = "DELETE FROM fgroup WHERE id = ?;";
     sql.query(query, [req.body.id],
         (error, results) => {
             if (error) {
@@ -44,7 +47,7 @@ const del = async (req, res) => {
                 res.sendStatus(400);
                 return;
             }
-            res.sendState(200);
+            res.sendStatus(200);
         });
 }
 
